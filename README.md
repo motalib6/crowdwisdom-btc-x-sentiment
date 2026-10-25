@@ -19,7 +19,7 @@ Scientist intern assessment, by Sk Motalib (B.Tech CSE, AI & ML).
 | Joined daily bars | 1,553 days, 2015-08-19 to 2019-11-18 (after the 30-day moving-average warm-up and the 5-day target shift). Stored in `data/joined_daily_bars.csv` and in SQLite `data/crowdwisdom.db` (tables: `tweets`, `price_bars`, `daily_bars`). |
 | Model | Ridge regression (numpy closed-form, alpha = 1.0), one model per horizon, features standardised on the training window only. |
 | Validation | Expanding-window walk-forward: 500-bar initial train, 5 folds × 180 test bars = 900 out-of-sample test rows per horizon, 2016-12-31 to 2019-06-18. |
-| News leg | NOT run (no Tavily/Exa key). Code stub in `src/ingest_news.py`. The sentiment outlook is therefore tweet-sample only. |
+| News leg | Live 5-item Tavily snapshot added 2026-10-25 (see `LIVE_SAMPLE_TAVILY.md`); not a series and not a model feature. The sample-end sentiment outlook is therefore tweet-sample only. |
 
 ## What was NOT run / NOT claimed
 
@@ -57,16 +57,16 @@ Scientist intern assessment, by Sk Motalib (B.Tech CSE, AI & ML).
 
 These are **to be configured, not claimed as used**:
 
-- Apify: set `APIFY_TOKEN` and `APIFY_ACTOR_ID` in the environment.
-  Actor to configure (verify in the Apify Store at run time):
-  the Apify Store **Twitter/X scraper actor** (commonly listed as
-  `apify/twitter-scraper`; confirm the exact actor ID in the Store
-  before running — this build does not assert an actor ID that was
-  never run). Search terms: `$BTC`, `#Bitcoin`, `Bitcoin`
-  (ticker, cashtag, keyword, as specified).
-  Then: `python -m src.ingest_tweets --source apify --actor-id <ACTOR_ID>`
-  (the live-run step is documented in code; it raises a clear error
-  without a token rather than silently proceeding).
+- Apify: live 50-tweet snapshot run 2026-10-25 with actor
+  `xquik/x-tweet-scraper` (id `wAusCMrm284Voaw86`, run
+  `hV7bSKANELToovkBz`, dataset `rUIZtbffzuVztTDJM`, actual cost
+  about $0.0154; see `LIVE_SAMPLE_APIFY.md`). The earlier suggestion
+  `apify/twitter-scraper` returned 404 and was not used. Search terms
+  for the snapshot: `Bitcoin lang:en -filter:retweets`, maxItems 50.
+  To reproduce, set `APIFY_TOKEN` and `APIFY_ACTOR_ID` in the
+  environment, then run the Apify actor helper in the connector doc;
+  `src/ingest_tweets.py --source apify` remains a stub that raises a
+  clear error without a token rather than silently proceeding.
 - Tavily (news): set `TAVILY_API_KEY`, see `src/ingest_news.py`
   (`https://api.tavily.com/search` — spelled "tavily" in the task doc).
 - Exa (news/search): set `EXA_API_KEY`, see `src/ingest_news.py`.

@@ -21,6 +21,18 @@
 
 ---
 
+## 1A. Live samples added 2026-10-25 evening (NOT merged into the backtest)
+
+These samples prove the live legs run, but they are snapshots, not a 180-day series, and they do not change any metric in Sections 3-4.
+
+**Apify X sample (live).** Actor `xquik/x-tweet-scraper` (id `wAusCMrm284Voaw86`; the README suggestion `apify/twitter-scraper` returned 404, so it was not used). Run id `hV7bSKANELToovkBz`, dataset id `rUIZtbffzuVztTDJM`, SUCCEEDED in 3.6 seconds. Input: searchTerms `Bitcoin lang:en -filter:retweets`, maxItems 50, queryType Latest. Raw output: `data/raw/tweets_apify_sample.json`; normalised output: `data/raw/tweets_apify_sample.csv`. Result: 50 latest tweets within 2026-10-25 14:39:37 to 14:42:42 UTC, a 3-minute snapshot, not a daily series. Lexicon sentiment mean 0.05 (positive 9, negative 6, neutral 35). Mean likes 0.48, mean retweets 0.06, mean views 60.38, mean author followers 9,007. Unlike the 2015-2019 sample, this live sample does carry real likes, retweets, views, and follower counts. Actual cost from the Apify run object: 50 items at $0.00015 each = $0.0075, plus platform usage $0.0079, total about $0.0154. A pre-run estimate of about $0.75, based on a FREE-tier pricing record of $0.015 per tweet, was too high and is corrected here.
+
+**Tavily news sample (live).** Search topic news, time range week, basic depth, max_results 5, query `Bitcoin price news`, cost 1 Tavily credit. Raw output: `data/raw/news_tavily_sample.json`. Results 21-25 Oct 2026: BTC fell below $80,000 on 24 Oct, recovered to $80,800 on 25 Oct ahead of a Fed meeting, and reached $81,700 on 23 Oct. In this small sample BTC was volatile around $80,000-$81,700 in the past week. This is a 5-item news snapshot, not a news sentiment series, and it is not a feature in the model.
+
+**What is still missing for a full live leg:** a 180-day Apify series with daily sentiment bars aligned to price, and a matching news series. The two samples above demonstrate the plumbing only.
+
+---
+
 ## 2. Method
 
 **Ingestion.** Tweets: Hugging Face sample `tahamajs/bitcoin_tweets_10_per_day` (17,880 tweets; label → +1/−1; 18 tweets had no label and were left blank). Price: Coinbase Exchange public API, BTC-USD daily candles (open/high/low/close/volume, UTC). Joined on calendar date into SQLite (`data/crowdwisdom.db`: `tweets`, `price_bars`, `daily_bars`) and `data/joined_daily_bars.csv`.
@@ -83,8 +95,8 @@ A same-day backtest (signal from the same row's n+0 prediction, realised same-da
 
 ## 5. Limitations (complete list)
 
-1. **No live Apify scrape** — last-180-days 2026 X data was not collected; the sample ends in 2019. The pipeline code is Apify-ready, but the live leg needs a token (see below).
-2. **No Tavily/Exa news leg** — no news sentiment in features or outlook.
+1. **No live 180-day Apify series** — last-180-days 2026 X data was not collected as a series; the walk-forward sample ends in 2019. A 50-tweet live snapshot was added on 2026-10-25 (see Section 1A), but it is not a daily series and does not feed the backtest.
+2. **No Tavily/Exa news series in the model** — no news sentiment in features or the sample-end outlook. A 5-item live Tavily news snapshot was added on 2026-10-25 (see Section 1A), but it is not a feature in the model.
 3. **No engagement features in the sample** — likes, reposts, views, follower counts are absent from the public sample and were left empty, not estimated.
 4. **Post volume is constant** — the sample is exactly 10 tweets/day, so `post_volume` carries no signal in this run (mean 10.0, std 0.0). A live Apify run would restore real volume variation.
 5. **Daily granularity only** — the sample has date-only timestamps, so intraday tweet-vs-close ordering cannot be resolved; the n+0 nowcast uses same-day aggregated sentiment (see artefact box).
@@ -96,7 +108,7 @@ A same-day backtest (signal from the same row's n+0 prediction, realised same-da
 
 ## 6. Tokens / actor IDs
 
-**None available, none submitted, none invented.** No Apify, Tavily or Exa token was available for this build (the candidate has no Apify/Tavily account for this task), so this report deliberately does not list a token value or an actor ID as "used". To reproduce the live leg, configure in the environment: `APIFY_TOKEN`, `APIFY_ACTOR_ID` (Apify Store Twitter/X scraper actor — verify the exact actor ID in the Apify Store before running; commonly listed as `apify/twitter-scraper`), `TAVILY_API_KEY`, `EXA_API_KEY`. Code paths: `src/ingest_tweets.py` (`--source apify`) and `src/ingest_news.py`. Any token supplied for a future submission should be scoped/revocable and rotated afterwards.
+**No token value is printed in this report.** The live samples in Section 1A were run through secure connections, and token values are deliberately not listed here, in code, or in an email body. Actor actually used for the live X sample: `xquik/x-tweet-scraper`, id `wAusCMrm284Voaw86`, run id `hV7bSKANELToovkBz`, dataset id `rUIZtbffzuVztTDJM`. Tavily was used for a live news search (see Section 1A); no Exa key was used. To reproduce the live leg, configure in the environment: `APIFY_TOKEN`, `APIFY_ACTOR_ID`, `TAVILY_API_KEY`, `EXA_API_KEY`. Code paths: `src/ingest_tweets.py` (`--source apify`) and `src/ingest_news.py`. Any token supplied for a future submission should be scoped/revocable and rotated afterwards.
 
 ## 7. Reproduction
 
