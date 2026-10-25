@@ -1,0 +1,58 @@
+{
+  "n_daily_bars": 1553,
+  "bars_start": "2015-08-19",
+  "bars_end": "2019-11-18",
+  "initial_train_bars": 500,
+  "fold_size": 180,
+  "model": "Ridge (numpy closed-form, alpha=1.0), one model per horizon, features standardised on training window only",
+  "per_horizon": {
+    "h0": {
+      "n_test": 900,
+      "rmse_price": 280.902016022678,
+      "mae_price": 151.4499577737194,
+      "rmse_persistence_price": 354.33155463131476,
+      "mae_persistence_price": 189.77494444444446,
+      "mean_actual_close": 5639.001122222222
+    },
+    "h1": {
+      "n_test": 900,
+      "rmse_price": 490.6479330116706,
+      "mae_price": 264.1176039518864,
+      "rmse_persistence_price": 516.71295873972,
+      "mae_persistence_price": 279.0493333333334,
+      "mean_actual_close": 5648.227977777778
+    },
+    "h2": {
+      "n_test": 900,
+      "rmse_price": 652.4161453157317,
+      "mae_price": 348.675608626452,
+      "rmse_persistence_price": 636.4759257412823,
+      "mae_persistence_price": 354.9184,
+      "mean_actual_close": 5657.714933333334
+    },
+    "h3": {
+      "n_test": 900,
+      "rmse_price": 796.8219080546713,
+      "mae_price": 429.48786768847015,
+      "rmse_persistence_price": 736.6024164307817,
+      "mae_persistence_price": 418.57003333333336,
+      "mean_actual_close": 5667.964655555555
+    },
+    "h4": {
+      "n_test": 900,
+      "rmse_price": 938.121594720459,
+      "mae_price": 511.35929682704347,
+      "rmse_persistence_price": 820.3292629924753,
+      "mae_persistence_price": 476.25728888888887,
+      "mean_actual_close": 5678.682644444444
+    },
+    "h5": {
+      "n_test": 900,
+      "rmse_price": 1086.6293003979604,
+      "mae_price": 589.9775770359657,
+      "rmse_persistence_price": 917.8130705392393,
+      "mae_persistence_price": 531.0457111111111,
+      "mean_actual_close": 5689.463444444444
+    }
+  }
+}

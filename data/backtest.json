@@ -1,0 +1,36 @@
+{
+  "naive_same_day_backtest": {
+    "sharpe_ratio": 11.059476266636404,
+    "sortino_ratio": 47.05670868366346,
+    "max_drawdown": -0.026838276270860217,
+    "total_log_return": 14.589832303217866,
+    "buy_and_hold_same_period": {
+      "sharpe_ratio": 1.0743479762736579,
+      "sortino_ratio": 1.043437684831513,
+      "max_drawdown": -0.8380153496105092,
+      "total_log_return": 2.2458853779962364
+    },
+    "n_test_days": 900,
+    "period_start": "2016-12-31",
+    "period_end": "2019-06-18",
+    "warning": "INFLATED BY SAMPLE CONSTRUCTION: daily sentiment sign agrees with same-day return sign on ~94% of days in this sample. Do NOT use this block as a trading result."
+  },
+  "lagged_executable_backtest": {
+    "sharpe_ratio": 0.7517440647697804,
+    "sortino_ratio": 0.5799354418200907,
+    "max_drawdown": -0.8051954277825027,
+    "total_log_return": 1.2439706068570289,
+    "buy_and_hold_same_period": {
+      "sharpe_ratio": 1.0687617021608056,
+      "sortino_ratio": 1.0385576033286057,
+      "max_drawdown": -0.8380153496105092,
+      "total_log_return": 2.232897779583634
+    },
+    "n_test_days": 899,
+    "period_start": "2017-01-01",
+    "period_end": "2019-06-18",
+    "signal": "long BTC on day t when the h=1 prediction made on day t-1 is positive, else cash; no leverage, no shorting, no fees/slippage",
+    "hit_rate_long_days": 0.6051167964404894
+  },
+  "headline_metrics": "Use lagged_executable_backtest for any honest claim about predictive skill. The naive block is reported only to expose the same-day label alignment artefact in this sample."
+}

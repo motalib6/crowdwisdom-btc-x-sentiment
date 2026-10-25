@@ -1,0 +1,8 @@
+# Runtime dependencies actually used by this pipeline (Python 3.12 tested).
+# No API keys are included here. Apify / Tavily / Exa keys, when available,
+# are read from environment variables at run time only (see README.md).
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.6
+requests>=2.31
+pyarrow>=14.0,<15  # 14.x is the series compatible with numpy 1.26 in this environment
