@@ -107,4 +107,4 @@ python run_pipeline.py
 #          data/predictions_walkforward.csv, charts/*.png
 ```
 
-All metrics in this report come from those output files of the actual run, not from placeholders. The GitHub repository link is to be added after the code is pushed (no repo was created by this build, and no URL is invented here).
+All metrics in this report come from those output files of the actual run, not from placeholders. GitHub repository (live, pushed 2026-10-25): https://github.com/motalib6/crowdwisdom-btc-x-sentiment

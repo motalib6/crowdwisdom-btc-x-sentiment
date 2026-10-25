@@ -35,8 +35,7 @@ Scientist intern assessment, by Sk Motalib (B.Tech CSE, AI & ML).
   sample has no likes, reposts, views or follower counts, so those
   columns are empty (not filled with invented values). The Apify
   schema in `src/ingest_tweets.py` includes them for the live run.
-- **No GitHub repo created by this build.** Push instructions are
-  below; fill in the real repo URL after pushing. Do not invent one.
+- **GitHub repo (live, pushed 2026-10-25):** https://github.com/motalib6/crowdwisdom-btc-x-sentiment
 
 ## Data sources
 
@@ -122,13 +121,10 @@ quoted.
   `data/predictions_walkforward.csv` — the actual run's numbers.
 - `BUILD_SUMMARY.md` — files, data, metrics, and every not-done item.
 
-## Push to GitHub (not done by this build)
+## GitHub repo (live)
 
-```bash
-git init && git add . && git commit -m "BTC X-sentiment price prediction pipeline"
-git remote add origin <YOUR-REPO-URL>
-git push -u origin main
-```
-
-Then put the real repo URL in the submission email. Do not use a
-placeholder URL as if it were live.
+Repo: https://github.com/motalib6/crowdwisdom-btc-x-sentiment
+Branch: main — pushed 2026-10-25, code + evaluation report + CSV data.
+Charts (PNG), SQLite DB and parquet sample are binary and are not in the
+GitHub snapshot; run `python run_pipeline.py` locally to regenerate them.
+Use this real repo URL in the submission email.
